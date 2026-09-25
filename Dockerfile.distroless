@@ -1,0 +1,11 @@
+FROM python:3.12-slim AS build
+WORKDIR /app
+COPY app/requirements.txt .
+RUN pip install --target=/app/deps -r requirements.txt
+
+FROM gcr.io/distroless/python3-debian12
+WORKDIR /app
+COPY --from=build /app/deps /app/deps
+COPY app/app.py .
+ENV PYTHONPATH=/app/deps
+CMD ["app.py"]

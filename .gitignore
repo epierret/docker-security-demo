@@ -1,0 +1,4 @@
+sbom.spdx.json
+*.tar
+__pycache__/
+*.pyc
